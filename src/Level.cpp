@@ -39,15 +39,15 @@ Level::Level(Context context, const std::string& name) :
             std::string value = line.substr(equalCharPos + 1);
 
             if (property == "HorizontalSpeed")
-                m_horizontalSpeed = std::stof(value);
+                m_horizontalSpeed = std::atof(value.c_str());
             else if (property == "VerticalSpeed")
-                m_verticalSpeed = std::stof(value);
+                m_verticalSpeed = std::atof(value.c_str());
             else if (property == "Gravity")
-                m_gravity = std::stof(value);
+                m_gravity = std::atof(value.c_str());
             else if (property == "Left")
-                m_context.player.setPosition({std::stof(value), m_context.player.getPosition().y});
+                m_context.player.setPosition({std::atof(value.c_str()), m_context.player.getPosition().y});
             else if (property == "Top")
-                m_context.player.setPosition({m_context.player.getPosition().x, std::stof(value)});
+                m_context.player.setPosition({m_context.player.getPosition().x, std::atof(value.c_str())});
             else
                 throw std::runtime_error{"Error parsing config file for level '" + name + "'."};
         }
@@ -91,9 +91,9 @@ Level::Level(Context context, const std::string& name) :
         float posX = 2540;
         for (unsigned int i = 1; i <= 5; ++i)
         {
-            auto top = tgui::Picture::create("resources/Level1Trap/Top" + std::to_string(i) + ".png");
-            auto middle = tgui::Picture::create("resources/Level1Trap/Middle" + std::to_string(i) + ".png");
-            auto bottom = tgui::Picture::create("resources/Level1Trap/Bottom" + std::to_string(i) + ".png");
+            auto top = tgui::Picture::create("resources/Level1Trap/Top" + tgui::to_string(i) + ".png");
+            auto middle = tgui::Picture::create("resources/Level1Trap/Middle" + tgui::to_string(i) + ".png");
+            auto bottom = tgui::Picture::create("resources/Level1Trap/Bottom" + tgui::to_string(i) + ".png");
 
             top->setPosition({posX, 1111});
             middle->setPosition({posX, 1236});
