@@ -1,0 +1,20 @@
+This game was written in less than 48 hours for Ludum Dare 30.
+
+There is hardly any sound, the graphics are bad and the code is a mess, but hopefully you can still enjoy it for a few minutes.
+
+Use the arrow keys to move and jump.
+
+
+Compilation
+===========
+
+If you want to build the program yourself you must install the following dependencies.
+You should use the links below to be sure that the versions are right.
+Especially don't use the official TGUI version, since I have used a custom version that had not been released yet.
+
+All three projects use cmake, and on e.g. linux this is just a matter of calling cmake and make without needing any configuration.
+
+SFML: https://github.com/LaurentGomila/SFML/archive/ef1b9d6b20fd2b301606ea4169b19bca750c2b0e.zip
+Thor: https://github.com/Bromeon/Thor/archive/d5ba1d02b51fad1b9ba8428567d435ac07179efe.zip
+TGUI: https://www.dropbox.com/s/d43kttnakixchwb/tgui-LD30.zip?dl=1
+
