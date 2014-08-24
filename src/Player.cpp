@@ -1,0 +1,85 @@
+
+#include "Player.hpp"
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Player::Player(tgui::Gui& gui) :
+    m_gui{gui}
+{
+    m_image = tgui::ext::SpriteSheet::create("resources/Player.png");
+    m_image->setColumns(3);
+    m_image->setSize(40, 60);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Player::addToGui()
+{
+    m_gui.add(m_image);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Player::setMoving(bool moving)
+{
+    m_moving = moving;
+
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Player::update()
+{
+    m_image->setPosition(getPosition());
+
+    if (m_clock.getElapsedTime().asMilliseconds() > 100)
+    {
+        m_clock.restart();
+
+        if (m_moving)
+        {
+            if ((m_image->getVisibleCell().x == 1) && !m_animationInc)
+                m_animationInc = true;
+            else
+            {
+                if (m_image->getVisibleCell().x == m_image->getColumns())
+                    m_animationInc = false;
+
+                if (m_animationInc)
+                    m_image->setVisibleCell(1, m_image->getVisibleCell().x + 1);
+                else
+                    m_image->setVisibleCell(1, m_image->getVisibleCell().x - 1);
+            }
+        }
+        else
+        {
+            m_animationInc = false;
+
+            if (m_image->getVisibleCell().x > 1)
+                m_image->setVisibleCell(1, m_image->getVisibleCell().x - 1);
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+sf::Vector2f Player::getSize()
+{
+    return m_image->getSize();
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Player::setSpeed(sf::Vector2f speed)
+{
+    m_speed = speed;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+sf::Vector2f Player::getSpeed()
+{
+    return m_speed;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
